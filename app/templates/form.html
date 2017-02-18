@@ -1,15 +1,69 @@
-
 {% extends 'layout.html'%}
-{% block form %}
+{% block content %}
 <form method="POST">
-    Emri: <input name="emri" value=""><br />
+
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>jQuery UI Accordion - Default functionality</title>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+$( function() {
+  $( "#accordion" ).accordion();
+  $( "#accordion2" ).accordion();
+  $( "#accordion3" ).accordion();
+} );
+</script>
+</head>
+<body>
+  <div id="accordion">
+<h3>Te dhenat per ndermarrjen</h3>
+<div>
     Emri ndermarrjes: <input name="emri_ndermarrjes" value=""><br />
     Nr. Regjistrimit: <input name="nr_regjistrimit" value=""><br />
     Adresa: <input name="adresa" value=""><br />
-    Personi Kontaktues <input name="personi_kontaktues" value=""><br />
-    Telefoni <input name="telefoni" value=""><br />
+    Personi Kontaktues: <input name="personi_kontaktues" value=""><br />
+    Telefoni: <input name="telefoni" value=""><br />
+    Email: <input name="email" value=""><br />
+</div>
+<h3>Elementet e Rrjetit</h3>
+<div>
+  <div id="accordion2">
+    <h3>Numri total i centraleve telefonike</h3>
+    <div>
+      <h3>Numri i centraleve digjitale</h3>
+      <div>
+        Sasia: <input name="sasia" value=""><br />
+        Komente: <input name="komente" value=""><br />
+      </div>
+      <h3>Numri i centraleve analoge</h3>
+      <div>
+        Sasia: <input name="sasia" value=""><br />
+        Komente: <input name="komente" value=""><br />
+      </div>
+    </div>
+  </div>
+  <h3>Kapaciteti ne total i centraleve telefonike</h3>
+  <div>
+    Sasia: <input name="sasia" value=""><br />
+    Komente: <input name="komente" value=""><br />
+  </div>
+</div>
+<h3>Section 3</h3>
+<div>
+</div>
+<h3>Section 4</h3>
+<div>
+</div>
+</div>
 
-    Email <input name="email" value=""><br />
+
+
+
+
+
     <button type="submit">
         Submit
     </button>
@@ -17,5 +71,4 @@
 {% if mesazhi %}
   <h2>{{ mesazhi }}</>
 {% endif %}
-
-{% endblock form %}
+{% endblock content %}
