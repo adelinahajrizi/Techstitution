@@ -2,6 +2,7 @@ from flask import Blueprint, Response, render_template, request, redirect, url_f
 from app import mongo
 from bson import ObjectId
 mod_main = Blueprint('main', __name__)
+from bson.json_util import dumps
 
 
 @mod_main.route('/')
@@ -38,11 +39,18 @@ def list():
     rekordet = db.find()
     return render_template('list.html',rekordet=rekordet)
 
-@mod_main.route('/remove/<string:remove_id>',methods=['POST'])
+@mod_main.route('/remove/<string:remove_id>', methods=['POST'])
 def remove(remove_id):
     db = mongo.db.arkep
     remove = db.remove({"_id" : ObjectId(remove_id)})
-    return Response(200)
+    if remove['n'] == 1:
+        return Response(response=dumps({"removed": True}),
+        status=200,
+        mimetype='application/json')
+    else:
+        return Response(response=dumps({"removed": False}),
+        status=500,
+        mimetype='application/json')
 
 @mod_main.route('/raporti/<string:report_id>')
 def raporti(report_id):
