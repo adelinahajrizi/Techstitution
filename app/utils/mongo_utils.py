@@ -1,5 +1,5 @@
 class MongoUtils(object):
-  mongo = None
+    mongo = None
 
-  def __init__(self, mongo):
-    self.mongo = mongo
+    def __init__(self, mongo):
+        self.mongo = mongo

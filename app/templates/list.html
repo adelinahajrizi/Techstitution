@@ -1,32 +1,28 @@
 {% extends 'layout.html'%}
 {% block content %}
-
 <script type="text/javascript">
 $(document).ready(function(){
-    $('.remove').click(function(event){
-      event.preventDefault();
-      var url=this.href;
-      $.post(url);
-   });
- });
+  $('.remove').click(function(event){
+    event.preventDefault();
+    var url = this.href;
+    $.post(url);
+  });
+});
 </script>
-<table class="table">
-  <tr>
-    <th>Emri</th>
-    <th>Email</th>
-    <th>Actions</th>
-  </tr>
-
-{% for rekordi in rekordet %}
-
-<tr>
-  <td>{{ rekordi['nderrmarja']['emri']}}</td>
-  <td>{{ rekordi['nderrmarja']['email']}}</td>
-  <td> <a class='remove' href="{{url_for('main.remove',remove_id=rekordi._id)}}"> Delete</a> | <a href="{{url_for('main.raporti',report_id=rekordi._id)}}">View</a> </td>
-</tr>
-
-
-  {% endfor %}
+<table>
+        <thead>
+          <tr><th>Emri i kompanise</th>
+          <th>Numri i regjistrimit</th>
+          <th>Actions</th></tr>
+        </thead>
+        <tbody>
+          {% for rekordi in rekordet %}
+          <tr>
+            <td>{{ rekordi ['nderrmarja']['emri']}}</td>
+            <td>{{ rekordi ['nderrmarja']['numri_regjistrimi']}}</td>
+            <td><a class="remove" href="{{url_for('main.remove',remove_id=rekordi._id)}}">Delete</a> | <a href="{{url_for('main.raporti',report_id=rekordi._id)}}">View</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
 </table>
-
-{% endblock  %}
+{% endblock %}
