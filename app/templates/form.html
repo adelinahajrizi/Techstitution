@@ -1,14 +1,13 @@
 {% extends 'layout.html'%}
 
 {% block title %} Pyetësori për shërbime telefonike {% endblock %}
-
+ 
 {% block head_include %}
     <link rel="stylesheet" href="/static/css/materialize-stepper.min.css">
     <style>
         .input-multi-display {
             font-weight: 500;
         }
-
         .font-scale {
             font-size: 120%;
         }
@@ -39,6 +38,10 @@
     </div>
 {% endmacro %}
 
+{% set args_1 = [('Sasia', 2), ('Komente', 10)] %}
+{% set args_2 = [('km', 2), ('Mbps', 2), ('Komente', 8)] %}
+{% set args_3 = [('Peak', 2), ('Off Peak', 2), ('Komente', 8)] %}
+{% set args_4 = [('Specifiko Operatorin', 3),('Peak', 2), ('Off peak', 2),('Komente', 5)] %}
 {% block content %}
     <div class="section">
         <div class="row">
@@ -56,10 +59,10 @@
                                             {{ input('Adresa e ndërmarrjes','adresa') }}
                                             {{ input('Personi Kontaktues', 'personi_kontaktues') }}
                                             {{ input('Telefoni', 'telefoni') }}
-                                            {{ input('E-mail adresa', 'telefoni') }}
+                                            {{ input('E-mail adresa', 'email') }}
                                         </div>
                                         <div class="step-actions">
-                                            <button class="waves-effect waves-dark btn next-step">VAZHDO</button>
+                                          <button class="waves-effect waves-dark btn next-step">VAZHDO</button>
                                         </div>
                                     </div>
                                 </li>
@@ -67,8 +70,6 @@
                                     <div class="step-title waves-effect">Elementet e rrjetit</div>
                                     <div class="step-content">
                                         <div class="row">
-                                            {% set args_1 = [('Sasia', 2), ('Komente', 10)] %}
-                                            {{ input_multi('Numri total i centraleve telefonike', 'nr_centraleve_total', args_1) }}
                                             {{ input_multi('Numri i centraleve digjitale (VoIP)', 'nr_centraleve_digjitale', args_1) }}
                                             {{ input_multi('Numri i centraleve analoge', 'nr_centraleve_analoge', args_1) }}
                                             {{ input_multi('Kapaciteti në total i centraleve telefonike', 'kapaciteti_centraleve', args_1) }}
@@ -83,14 +84,11 @@
                                     <div class="step-title waves-effect">Infrastruktura e rrjetit të instaluar</div>
                                     <div class="step-content">
                                         <div class="row">
-                                            {% set args_2 = [('km', 2), ('Mbps', 2), ('Komente', 8)] %}
-                                            {{ input_multi('Fibër optik e instaluar', 'fiber_optik', args_2) }}
-                                            {{ input_multi('Totali i fibrit optik të instaluar në rrjetin e qasjes (Access Network)', 'fiber_optik_access', args_2) }}
+                                            {{ input_multi('Totali i fibrit optik të instaluar në rrjetin e qasjes (Access Network)', 'fiber_optik_access', 'km1' , 'm2') }}
                                             {{ input_multi('Totali i fibrit optik të instaluar në rrjetin e transmetimit (Core Network)', 'fiber_optik_core', args_2) }}
-                                            {{ input_multi('Kabëll koaksial/çiftore', 'kabell_koaksial', args_2) }}
                                             {{ input_multi('Totali i kabllit koaksial/ çiftoreve të instaluar në rrjetin e qasjes (Access Network)', 'kabell_koaksial_access', args_2) }}
                                             {{ input_multi('Totali i kabllit koaksial/çiftoreve të instaluar në rrjetin e transmetimit (Core Network)', 'kabell_koaksial_core', args_2) }}
-                                            {{ input_multi('Lidhje me radiofrekuenca mikrovalore (PTP)', 'kabell_koaksial_core', args_2) }}
+                                            {{ input_multi('Lidhje me radiofrekuenca mikrovalore (PTP)', 'lidhja_radiofrekuenca_mikrovalore', args_2) }}
                                         </div>
                                         <div class="step-actions">
                                             <button class="waves-effect waves-dark btn next-step">VAZHDO</button>
@@ -138,10 +136,10 @@
                                     <div class="step-title waves-effect">Numri i përdoruesve që kanë qasje në shërbime të integruara</div>
                                     <div class="step-content">
                                         <div class="row">
-                                            {{ input_multi('Telefoni dhe Internet', 'nr_telefoni_internet', args_1) }}
-                                            {{ input_multi('Telefoni dhe TV', 'nr_telefoni_tv', args_1) }}
-                                            {{ input_multi('Telefoni, Internet dhe TV', 'nr_telefoni_internet_tv', args_1) }}
-                                            {{ input_multi('Tjera', 'nr_tjera', args_1) }}
+                                            {{ input_multi('Telefoni dhe Interneti', 'telefoni_interneti', args_1) }}
+                                            {{ input_multi('Telefoni dhe TV', 'telefoni_tv', args_1) }}
+                                            {{ input_multi('Telefoni, Internet dhe TV', 'telefoni_interneti_tv', args_1) }}
+                                            {{ input_multi('Tjera', 'tjera', args_1) }}
                                         </div>
                                         <div class="step-actions">
                                             <button class="waves-effect waves-dark btn next-step">VAZHDO</button>
@@ -154,9 +152,9 @@
                                     <div class="step-content">
                                         <div class="row">
                                             {{ input_multi('Origjinimi dhe terminimi i thirrjeve në rrjetin e vet (On net Calls)', 'trafiku_1', args_1) }}
-                                            {{ input_multi('Origjinimi i thirrjeve drejt rjeteve të tjera të fikse (outgoing calls)', 'trafiku_2', args_1) }}
+                                            {{ input_multi('Origjinimi i thirrjeve drejt rrjeteve të tjera fikse (outgoing calls)', 'trafiku_2', args_1) }}
                                             {{ input_multi('Origjinimi i thirrjeve drejt rrjeteve mobile (Fixed to Mobile outgoing calls)', 'trafiku_3', args_1) }}
-                                            {{ input_multi('Origjinimi i thirrjeve drejt  rrjetit nderkombëtare (International outgoing calls)', 'trafiku_4', args_1) }}
+                                            {{ input_multi('Origjinimi i thirrjeve drejt rrjetit nderkombëtare (International outgoing calls)', 'trafiku_4', args_1) }}
                                             {{ input_multi('Terminimi i thirrjeve nga rrjetet tjera fikse (incoming off net calls)', 'trafiku_5', args_1) }}
                                             {{ input_multi('Terminimi i thirrjeve nga rrjetet mobile (Mobile to Fixed incoming)', 'trafiku_6', args_1) }}
                                             {{ input_multi('Terminimi i thirrjeve nga rrjeti nderkombëtare (International incoming calls)', 'trafiku_7', args_1) }}
@@ -169,11 +167,11 @@
                                     </div>
                                 </li>
                                 <li class="step">
-                                    <div class="step-title waves-effect">Trafiku i realizuar(ne minuta)</div>
+                                    <div class="step-title waves-effect">Trafiku i realizuar(në minuta)</div>
                                     <div class="step-content">
                                         <div class="row">
                                             {{ input_multi('Origjinimi dhe terminimi i thirrjeve në rrjetin e vet (On net Calls)', 'trafiku_realizuar_1', args_1) }}
-                                            {{ input_multi('Origjinimi i thirrjeve drejt rjeteve të tjera të fikse (outgoing calls)', 'trafiku_realizuar_2', args_1) }}
+                                            {{ input_multi('Origjinimi i thirrjeve drejt rrjeteve të tjera fikse (outgoing calls)', 'trafiku_realizuar_2', args_1) }}
                                             {{ input_multi('Origjinimi i thirrjeve drejt rrjeteve mobile (Fixed to Mobile outgoing calls)', 'trafiku_realizuar_3', args_1) }}
                                             {{ input_multi('Origjinimi i thirrjeve drejt  rrjetit nderkombëtare (International outgoing calls)', 'trafiku_realizuar_4', args_1) }}
                                             {{ input_multi('Terminimi i thirrjeve nga rrjetet tjera fikse (incoming off net calls)', 'trafiku_realizuar_5', args_1) }}
@@ -189,18 +187,45 @@
                                     </div>
                                 </li>
                                 <li class="step">
-                                    <div class="step-title waves-effect">Informacione te tjera rreth cilesise se sherbimit</div>
+                                    <div class="step-title waves-effect">Thirrjet e drejtuar drejt operatorëve dhe vendeve të ndryshme</div>
                                     <div class="step-content">
                                         <div class="row">
-                                            {{ input_multi('Koha mesatare e insalimit te linjes telefonike pas lidhjes se kontrates(dite)', 'trafiku_realizuar_1', args_1) }}
-                                            {{ input_multi('Tarifat e kyqjes(ne euro)', 'trafiku_realizuar_2', args_1) }}
-                                            {{ input_multi('Tarifa mujore e qerase(ne euro)', 'trafiku_realizuar_3', args_1) }}
-                                            {{ input_multi('Numri i defekteve te raportuara', 'trafiku_realizuar_4', args_1) }}
-                                            {{ input_multi('Terminimi i thirrjeve nga rrjetet tjera fikse (incoming off net calls)', 'trafiku_realizuar_5', args_1) }}
-                                            {{ input_multi('Numri i ankesave nga perdoruesit per faturim', 'trafiku_realizuar_6', args_1) }}
-                                            {{ input_multi('Numri i ankesave tjera nga perdoruesit', 'trafiku_realizuar_7', args_1) }}
-                                            {{ input_multi('Kontributi per sherbime universale',trafiku_realizuar_7,args_1) }}
-                                            {{input_multi('Sasia e pranuar per sherbime universale','trafiku_realizuar_9',args_1)}}
+                                            {{ input_multi('Thirrje lokale', 'thirrje_lokale', args_3) }}
+                                            {{ input_multi('Thirrje kombëtare', 'thirrje_kombetare', args_3) }}
+                                            {{ input_multi('Thirrjet drejt rrjeteve tjera fikse', 'thirrjet_rrjeteve_tjera_fikse', args_4) }}
+                                            {{ input_multi('Thirrjet drejt rrjetit mobil 1', 'thirrjet_rrjetit_mobil1', args_4) }}
+                                            {{ input_multi('Thirrjet drejt rrjetit mobil 2', 'thirrjet_rrjetit_mobil2', args_4) }}
+                                            {{ input_multi('Thirrjet drejt rrjetit mobil 3', 'thirrjet_rrjetit_mobil3', args_4) }}
+                                            {{ input_multi('Thirrjet drejt rrjetit mobil 4', 'thirrjet_rrjetit_mobil4', args_4) }}
+                                            {{ input_multi('Thirrjet drejt Shqiperisë(mobil)', 'shqiperia_mobil', args_3) }}
+                                            {{ input_multi('Thirrjet drejt Shqiperisë(fiks)', 'shqiperia', args_3) }}
+                                            {{ input_multi('Thirrjet drejt Maqedonisë(mobil)', 'maqedonia_mobil', args_3) }}
+                                            {{ input_multi('Thirrjet drejt Maqedonisë(fiks)', 'maqedonia', args_3) }}
+                                            {{ input_multi('Thirrjet drejt Malit të Zi(mobil)', 'mal_zi_mobil', args_3) }}
+                                            {{ input_multi('Thirrjet drejt Malit të Zi(fiks)', 'mal_zi', args_3) }}
+                                            {{ input_multi('Thirrjet drejt Serbisë(mobil)', 'serbi_mobil', args_3) }}
+                                            {{ input_multi('Thirrjet drejt Serbisë(fiks)', 'serbi', args_3) }}
+                                            {{ input_multi('Thirrjet drejt Kroacisë(mobil)', 'kroaci_mobil', args_3) }}
+                                            {{ input_multi('Thirrjet drejt Kroacisë(fiks)', 'kroaci', args_3) }}
+                                            {{ input_multi('Thirrjet drejt Bosnje dhe Hercegovinës(bosnje_hercegovina_mobil)', 'trafiku_realizuar_4', args_3) }}
+                                            {{ input_multi('Thirrjet drejt Bosnje dhe Hercegovinës(bosnje_hercegovina)', 'trafiku_realizuar_4', args_3) }}
+                                            {{ input_multi('Thirrjet drejt Turqisë(mobil)', 'turqi_mobil', args_3) }}
+                                            {{ input_multi('Thirrjet drejt Turqisë(fiks)', 'turqi', args_3) }}
+                                            {{ input_multi('Thirrjet drejt Gjermanisë(mobil)', 'gjermani_mobil', args_3) }}
+                                            {{ input_multi('Thirrjet drejt Gjermanisë(fiks)', 'gjermani', args_3) }}
+                                            {{ input_multi('Thirrjet drejt Italisë(mobil)', 'itali_mobil', args_3) }}
+                                            {{ input_multi('Thirrjet drejt Italisë(fiks)', 'itali', args_3) }}
+                                            {{ input_multi('Thirrjet drejt Francës(mobil)', 'france_mobil', args_3) }}
+                                            {{ input_multi('Thirrjet drejt Francës(fiks)', 'france', args_3) }}
+                                            {{ input_multi('Thirrjet drejt Zvicrrës(mobil)', 'zvicer_mobil', args_3) }}
+                                            {{ input_multi('Thirrjet drejt Zvicrrës(fiks)', 'zvicer', args_3) }}
+                                            {{ input_multi('Thirrjet drejt Mbreterisë së Bashkuar(mobil)', 'uk_mobil', args_3) }}
+                                            {{ input_multi('Thirrjet drejt Mbreterisë së Bashkuar(fiks)', 'uk', args_3) }}
+                                            {{ input_multi('Thirrjet drejt SHBA-së(mobil)', 'usa_mobil', args_3) }}
+                                            {{ input_multi('Thirrjet drejt SHBA-së(fiks)', 'usa', args_3) }}
+                                            {{ input_multi('Thirrjet drejt Kanadasë(mobil)', 'kanada_mobil', args_3) }}
+                                            {{ input_multi('Thirrjet drejt Kanadasë(fiks)', 'kanada', args_3) }}
+
                                         </div>
                                         <div class="step-actions">
                                             <button class="waves-effect waves-dark btn next-step">VAZHDO</button>
@@ -209,14 +234,17 @@
                                     </div>
                                 </li>
                                 <li class="step">
-                                    <div class="step-title waves-effect">Interkoneksioni - Cmimi per 1 minut komunikim pa TVSH</div>
+                                    <div class="step-title waves-effect">Informacione te tjera rreth cilësisë së shërbimit</div>
                                     <div class="step-content">
                                         <div class="row">
-                                            {{ input_multi('Kombetar(fiks-fiks)', 'trafiku_realizuar_1', args_1) }}
-                                            {{ input_multi('Kombetar(mobil-fiks)', 'trafiku_realizuar_2', args_1) }}
-                                            {{ input_multi('Nderkombetar ne kombetar', 'trafiku_realizuar_3', args_1) }}
-                                            {{ input_multi('Tranzit kombetar ne kombetar fiks', 'trafiku_realizuar_4', args_1) }}
-                                            {{ input_multi('Tranzit nderkombetar ne kombetar', 'trafiku_realizuar_5', args_1) }}
+                                            {{ input_multi('Koha mesatare e instalimit të linjës telefonike pas lidhjes së kontratës(ditë)', 'informacione1', args_1) }}
+                                            {{ input_multi('Tarifat e kyqjes(në euro)', 'informacione2', args_1) }}
+                                            {{ input_multi('Tarifa mujore e qerasë(në euro)', 'informacione3', args_1) }}
+                                            {{ input_multi('Numri i defekteve të raportuara', 'informacione4', args_1) }}
+                                            {{ input_multi('Numri i ankesave nga përdoruesit për faturim', 'informacione5', args_1) }}
+                                            {{ input_multi('Numri i ankesave tjera nga përdoruesit', 'informacione6', args_1) }}
+                                            {{ input_multi('Kontributi për shërbime universale',informacione7,args_1) }}
+                                            {{input_multi('Sasia e pranuar për shërbime universale','informacione8',args_1)}}
                                         </div>
                                         <div class="step-actions">
                                             <button class="waves-effect waves-dark btn next-step">VAZHDO</button>
@@ -225,12 +253,14 @@
                                     </div>
                                 </li>
                                 <li class="step">
-                                    <div class="step-title waves-effect">Transferimi i te dhenava</div>
+                                    <div class="step-title waves-effect">Interkoneksioni-Cmimi për 1 minutë komunikim pa TVSH</div>
                                     <div class="step-content">
                                         <div class="row">
-                                            {{ input_multi('Sasia e te dhenave te transferuar ne trafikun kombetar', 'trafiku_realizuar_1', args_1) }}
-                                            {{ input_multi('Sasia e te dhenave te transferuar ne trafikun nderkombetar', 'trafiku_realizuar_2', args_1) }}
-                                            {{ input_multi('Shuma totale e te dhenave te transferuara', 'trafiku_realizuar_3', args_1) }}
+                                            {{ input_multi('Kombëtar(fiks-fiks)', 'interkoneksioni1', args_3) }}
+                                            {{ input_multi('Kombëtar(mobil-fiks)', 'interkoneksioni2', args_3) }}
+                                            {{ input_multi('Ndërkombetar në kombëtar', 'interkoneksioni3', args_3) }}
+                                            {{ input_multi('Tranzit kombëtar në kombëtar fiks', 'interkoneksioni4', args_3) }}
+                                            {{ input_multi('Tranzit ndërkombëtar në kombëtar', 'interkoneksioni5', args_3) }}
                                         </div>
                                         <div class="step-actions">
                                             <button class="waves-effect waves-dark btn next-step">VAZHDO</button>
@@ -239,20 +269,34 @@
                                     </div>
                                 </li>
                                 <li class="step">
-                                    <div class="step-title waves-effect">Te hyrat</div>
+                                    <div class="step-title waves-effect">Transferimi i të dhënava</div>
                                     <div class="step-content">
                                         <div class="row">
-                                            {{ input_multi('Te ardhurat nga trafiku ne rrjetin e vet', 'trafiku_realizuar_1', args_1) }}
-                                            {{ input_multi('Te ardhurat nga trafiku ne rrjete te tjera te caktuar(me shumice-wholesale)', args_1) }}
-                                            {{ input_multi('Te ardhurat nga trafiku ne rrjete te tjera te caktuar(pakice-retail)', args_1) }}
-                                            {{ input_multi('Te ardhurat nga trafiku ne rrjete te tjera te mobile(pakice-retail)', 'trafiku_realizuar_4', args_1) }}
-                                            {{ input_multi('Te ardhurat nga trafiku nderkombetar telefonik(me shumice-wholesale)', 'trafiku_realizuar_5', args_1) }}
-                                            {{ input_multi('Te ardhurat nga trafiku nderkombetar telefonik(pakice-retail)', 'trafiku_realizuar_6', args_1) }}
-                                            {{ input_multi('Te ardhurat nga ofruesit e sherbimeve me cmime te vecante ne kosto', 'trafiku_realizuar_7', args_1) }}
-                                            {{ input_multi('Te ardhurat nga (Dial up,qasje ne internet)',trafiku_realizuar_7,args_1) }}
-                                            {{input_multi('Te ardhurat nga ofruesit e sherbimeve VoIP','trafiku_realizuar_9',args_1)}}
-                                            {{input_multi('Te ardhurat te tjera*','trafiku_realizuar_9',args_1)}}
-                                            {{input_multi('Te ardhurat gjithsej','trafiku_realizuar_9',args_1)}}
+                                            {{ input_multi('Sasia e të dhënave të transferuar në trafikun kombëtar', 'transferimi1', args_1) }}
+                                            {{ input_multi('Sasia e të dhënave të transferuar në trafikun ndërkombëtar', 'transferimi2', args_1) }}
+                                            {{ input_multi('Shuma totale e të dhënave të transferuara', 'transferimi3', args_1) }}
+                                        </div>
+                                        <div class="step-actions">
+                                            <button class="waves-effect waves-dark btn next-step">VAZHDO</button>
+                                            <button class="waves-effect waves-dark btn-flat previous-step">PRAPA</button>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="step">
+                                    <div class="step-title waves-effect">Të hyrat</div>
+                                    <div class="step-content">
+                                        <div class="row">
+                                            {{ input_multi('Të ardhurat nga trafiku në rrjetin e vet', 'teardhurat1', args_1) }}
+                                            {{ input_multi('Të ardhurat nga trafiku në rrjete të tjera të caktuar(me shumice-wholesale)',teardhurat2, args_1) }}
+                                            {{ input_multi('Të ardhurat nga trafiku në rrjete të tjera të caktuar(pakice-retail)',teardhurat3, args_1) }}
+                                            {{ input_multi('Te ardhurat nga trafiku në rrjete të tjera mobile(pakice-retail)', 'teardhurat4', args_1) }}
+                                            {{ input_multi('Të ardhurat nga trafiku ndërkombëtar telefonik(me shumicë-wholesale)', 'teardhurat5', args_1) }}
+                                            {{ input_multi('Të ardhurat nga trafiku ndërkombetar telefonik(pakicë-retail)', 'teardhurat6', args_1) }}
+                                            {{ input_multi('Të ardhurat nga ofruesit e shërbimeve me cmime të vecantë në kosto', 'teardhurat7', args_1) }}
+                                            {{ input_multi('Te ardhurat nga (Dial up,qasje në internet)',teardhurat8,args_1) }}
+                                            {{input_multi('Te ardhurat nga ofruesit e shërbimeve VoIP','teardhurat9',args_1)}}
+                                            {{input_multi('Te ardhurat të tjera','teardhurat10',args_1)}}
+                                            {{input_multi('Te ardhurat gjithsej','teardhurat11',args_1)}}
                                         </div>
                                         <div class="step-actions">
                                             <button class="waves-effect waves-dark btn next-step">VAZHDO</button>
@@ -264,11 +308,11 @@
                                     <div class="step-title waves-effect">Fitimi para tatimit</div>
                                     <div class="step-content">
                                         <div class="row">
-                                            {{ input_multi('EBIT', 'trafiku_realizuar_1', args_1) }}
-                                            {{ input_multi('EBITDA', 'trafiku_realizuar_2', args_1) }}
-                                            {{ input_multi('ROCE (%)', 'trafiku_realizuar_3', args_1) }}
-                                            {{ input_multi('EBITDA margina (%)', 'trafiku_realizuar_4', args_1) }}
-                                            {{ input_multi('EBIT margina (%)', 'trafiku_realizuar_5', args_1) }}
+                                            {{ input_multi('EBIT', 'ebit', args_1) }}
+                                            {{ input_multi('EBITDA', 'ebitda', args_1) }}
+                                            {{ input_multi('ROCE (%)', 'roce', args_1) }}
+                                            {{ input_multi('EBITDA margina (%)', 'ebitda_margina', args_1) }}
+                                            {{ input_multi('EBIT margina (%)', 'ebit_margina', args_1) }}
                                         </div>
                                         <div class="step-actions">
                                             <button class="waves-effect waves-dark btn next-step">VAZHDO</button>
@@ -277,10 +321,10 @@
                                     </div>
                                 </li>
                                 <li class="step">
-                                    <div class="step-title waves-effect">Shpenzimet (euro)</div>
+                                    <div class="step-title waves-effect">Shpenzimet(euro)</div>
                                     <div class="step-content">
                                         <div class="row">
-                                            {{ input_multi('Shpenzimet totale', 'trafiku_realizuar_1', args_1) }}
+                                            {{ input_multi('Shpenzimet totale', 'shpenzimet_totale', args_1) }}
                                         </div>
                                         <div class="step-actions">
                                             <button class="waves-effect waves-dark btn next-step">VAZHDO</button>
@@ -292,8 +336,8 @@
                                     <div class="step-title waves-effect">Zhvleftsimi dhe Amortizimi</div>
                                     <div class="step-content">
                                         <div class="row">
-                                            {{ input_multi('Zhvleftsimi', 'trafiku_realizuar_1','trafiku_realizuar_2', args_1) }}
-                                            {{ input_multi('Amortizimi', 'trafiku_realizuar_1','trafiku_realizuar_2', args_1) }}
+                                            {{ input_multi('Zhvleftsimi','zhvleftsimi', args_1) }}
+                                            {{ input_multi('Amortizimi','amortizimi', args_1) }}
                                         </div>
                                         <div class="step-actions">
                                             <button class="waves-effect waves-dark btn next-step">VAZHDO</button>
@@ -302,15 +346,15 @@
                                     </div>
                                 </li>
                                 <li class="step">
-                                    <div class="step-title waves-effect">Investimet ne sherbime dhe infrastrukturen telekomunikuese</div>
+                                    <div class="step-title waves-effect">Investimet në shërbime dhe infrastrukturën telekomunikuese</div>
                                     <div class="step-content">
                                         <div class="row">
-                                            {{ input_multi('Investime ne sherbime dhe infrastrukture-rrjetin backbone', 'trafiku_realizuar_1', args_1) }}
-                                            {{ input_multi('Investime ne sherbime dhe infrastrukture-rrjetin e qasjes','trafiku_realizuar_2', args_1) }}
-                                            {{ input_multi('Investime ne hulumtime dhe zhvillim te produkteve', 'trafiku_realizuar_2',args_1) }}
-                                            {{ input_multi('Shpenzimet ne marketing', 'trafiku_realizuar_4','trafiku_realizuar_2', args_1) }}
-                                            {{ input_multi('Shpenzime tjera', 'trafiku_realizuar_5', 'trafiku_realizuar_2',args_1) }}
-                                            {{ input_multi('Totali', 'trafiku_realizuar_6','trafiku_realizuar_2', args_1) }}
+                                            {{ input_multi('Investime në shërbime dhe infrastrukturë-rrjetin backbone', 'investime1', args_1) }}
+                                            {{ input_multi('Investime në shërbime dhe infrastrukturë-rrjetin e qasjes','investime2', args_1) }}
+                                            {{ input_multi('Investime në hulumtime dhe zhvillim të produkteve', 'investime3',args_1) }}
+                                            {{ input_multi('Shpenzimet në marketing', 'shpenzime1', args_1) }}
+                                            {{ input_multi('Shpenzime tjera', 'shpenzime2',args_1) }}
+                                            {{ input_multi('Totali', 'shpenzime3',args_1) }}
                                         </div>
                                         <div class="step-actions">
                                             <button class="waves-effect waves-dark btn next-step">VAZHDO</button>
@@ -319,15 +363,15 @@
                                     </div>
                                 </li>
                                 <li class="step">
-                                    <div class="step-title waves-effect">Te dhenat mbi numrin e punetoreve</div>
+                                    <div class="step-title waves-effect">Të dhënat mbi numrin e punëtorëve</div>
                                     <div class="step-content">
                                         <div class="row">
-                                            {{ input_multi('Numri i punetoreve me orar te plote pune', 'trafiku_realizuar_1', args_1) }}
-                                            {{ input_multi('Numri i punetoreve me orar te pjeseshem pune', 'trafiku_realizuar_2', args_1) }}
-                                            {{ input_multi('Totali i te punesuarve','trafiku_realizuar_2', args_1) }}
+                                            {{ input_multi('Numri i punëtoreve me orar te plotë pune', 'punetoret1', args_1) }}
+                                            {{ input_multi('Numri i punëtorëve me orar të pjesëshem pune', 'punetoret2', args_1) }}
+                                            {{ input_multi('Totali i të punësuarve','punetoret3', args_1) }}
                                         </div>
                                         <div class="step-actions">
-                                            <button class="waves-effect waves-dark btn next-step">SUBMIT</button>
+                                            <button class="btn waves-effect waves-light " type="submit" name="action">DËRGO<i class="material-icons right">send</i></button>
                                             <button class="waves-effect waves-dark btn-flat previous-step">PRAPA</button>
                                         </div>
                                     </div>
@@ -342,7 +386,6 @@
     </div>
 
 {% endblock %}
-
 {% block script %}
     <script type="text/javascript" src="/static/js/jquery.validate.min.js"></script>
     <script type="text/javascript" src="/static/js/materialize-stepper.min.js"></script>

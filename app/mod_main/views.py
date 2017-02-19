@@ -17,12 +17,13 @@ def pyetesori():
     elif request.method == 'POST':
         form_data = request.form.to_dict()
         data = {
-            "nderrmarja": {
-                "emri": form_data['emri_ndermarrjes'],
-                "numri_regjistrimi": form_data['nr_regjistrimit'],
-                "adresa": form_data['adresa'],
-                "personi_kontaktues": form_data['personi_kontaktues'],
-                "telefoni": form_data['telefoni']
+          "nderrmarja":{
+            "emri": form_data['emri_ndermarrjes'],
+            "numri_regjistrimi": form_data['nr_regjistrimit'],
+            "adresa": form_data['adresa'],
+            "personi_kontaktues": form_data['personi_kontaktues'],
+            "telefoni": form_data['telefoni'],
+            "email": form_data['email']
             }
         }
 
